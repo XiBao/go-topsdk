@@ -10,7 +10,7 @@ type SimbaInsightWordscatsGetRequest struct {
 
 // create new request
 func NewSimbaInsightWordscatsGetRequest() (req *SimbaInsightWordscatsGetRequest) {
-	request := topsdk.Request{MethodName: "taobao.simba.insight.wordscats.get", Params: make(map[string]interface{}, 4)}
+	request := topsdk.Request{MethodName: "taobao.simba.insight.wordscats.get", Params: make(map[string]interface{}, 3)}
 	req = &SimbaInsightWordscatsGetRequest{
 		Request: &request,
 	}
@@ -44,14 +44,14 @@ func (req *SimbaInsightWordscatsGetRequest) GetNick() string {
 }
 
 //查询词和类目数组，最大长度200，每一个数组元素都是词+类目，以”^^”分割如下：
-func (req *SimbaInsightWordscatsGetRequest) SetWordCategories(wordCategories []string) {
+func (req *SimbaInsightWordscatsGetRequest) SetWordCategories(wordCategories string) {
 	req.Request.Params["word_categories"] = wordCategories
 }
 
-func (req *SimbaInsightWordscatsGetRequest) GetWordCategories() []string {
+func (req *SimbaInsightWordscatsGetRequest) GetWordCategories() string {
 	wordCategories, found := req.Request.Params["word_categories"]
 	if found {
-		return wordCategories.([]string)
+		return wordCategories.(string)
 	}
-	return []string{}
+	return ""
 }
