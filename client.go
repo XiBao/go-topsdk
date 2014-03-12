@@ -123,6 +123,8 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 		regex, _ = regexp.Compile("\"campaign_id\":(\\d+)")
 		res = regex.ReplaceAllString(res, "\"campaign_id\":\"$1\"")
 		res = strings.Replace(res, "\n", "", -1)
+		res = strings.Replace(res, "\r", "", -1)
+		res = strings.Replace(res, "\t", "", -1)
 		e = json.Unmarshal([]byte(res), &j)
 	case XML_FORMAT:
 		j, e = x2j.DocToMap(string(body))
