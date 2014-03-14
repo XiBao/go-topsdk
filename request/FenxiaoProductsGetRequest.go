@@ -10,7 +10,7 @@ type FenxiaoProductsGetRequest struct {
 
 // create new request
 func NewFenxiaoProductsGetRequest() (req *FenxiaoProductsGetRequest) {
-	request := topsdk.Request{MethodName: "taobao.fenxiao.products.get", Params: make(map[string]interface{}, 13)}
+	request := topsdk.Request{MethodName: "taobao.fenxiao.products.get", Params: make(map[string]interface{}, 12)}
 	req = &FenxiaoProductsGetRequest{
 		Request: &request,
 	}
