@@ -53,7 +53,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	sysParams["method"] = req.MethodName
 	sysParams["timestamp"] = time.Now().Local().Format("2006-01-02 15:04:05")
 	sysParams["partner_id"] = SDK_VERSION
-	if len(session) > 0 {
+	if len(session) > 0 && session[0] != "" {
 		sysParams["session"] = session[0]
 	}
 	for k, v := range req.Params {
