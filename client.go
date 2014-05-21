@@ -4,15 +4,14 @@ import (
 	"crypto/md5"
 	"crypto/sha1"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
+	"github.com/bububa/ljson"
 	"github.com/bububa/x2j"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
-	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -104,7 +103,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	j := make(map[string]interface{})
 	switch sysParams["format"] {
 	case JSON_FORMAT:
-		regex, _ := regexp.Compile("\",,\"")
+		/*regex, _ := regexp.Compile("\",,\"")
 		res := regex.ReplaceAllString(string(body), "\",\"")
 		regex, _ = regexp.Compile("\"tid\":(\\d+)")
 		res = regex.ReplaceAllString(res, "\"tid\":\"$1\"")
@@ -121,11 +120,12 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 		regex, _ = regexp.Compile("\"adgroup_id\":(\\d+)")
 		res = regex.ReplaceAllString(res, "\"adgroup_id\":\"$1\"")
 		regex, _ = regexp.Compile("\"campaign_id\":(\\d+)")
-		res = regex.ReplaceAllString(res, "\"campaign_id\":\"$1\"")
+		res = regex.ReplaceAllString(res, "\"campaign_id\":\"$1\"")*/
+		res := string(body)
 		res = strings.Replace(res, "\n", "", -1)
 		res = strings.Replace(res, "\r", "", -1)
 		res = strings.Replace(res, "\t", "", -1)
-		e = json.Unmarshal([]byte(res), &j)
+		e = ljson.Unmarshal([]byte(res), &j)
 	case XML_FORMAT:
 		j, e = x2j.DocToMap(string(body))
 	}
