@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"github.com/bububa/ljson"
-	"github.com/bububa/x2j"
+	"github.com/clbanning/x2j"
 	"io"
 	"io/ioutil"
 	"log"
