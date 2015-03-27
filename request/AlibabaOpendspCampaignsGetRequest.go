@@ -29,11 +29,11 @@ func (req *AlibabaOpendspCampaignsGetRequest) GetDspCustId() string {
 	return ""
 }
 
-func (req *AlibabaOpendspAdgroupsGetRequest) SetCampaignIdList(ids string) {
+func (req *AlibabaOpendspCampaignsGetRequest) SetCampaignIdList(ids string) {
 	req.Request.Params["campaign_id_list"] = ids
 }
 
-func (req *AlibabaOpendspAdgroupsGetRequest) GetCampaignIdList() string {
+func (req *AlibabaOpendspCampaignsGetRequest) GetCampaignIdList() string {
 	ids, found := req.Request.Params["campaign_id_list"]
 	if found {
 		return ids.(string)

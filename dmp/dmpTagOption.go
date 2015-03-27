@@ -5,6 +5,6 @@ type DmpTagOption struct {
 	OptionName     string `json:"option_name,omitempty" codec:",omitempty"`      // 值名称
 	OptionGroupId  uint64 `json:"option_group_id,omitempty" codec:",omitempty"`  // 标签分组ID
 	ParentOptionId uint64 `json:"parent_option_id,omitempty" codec:",omitempty"` // 父节点ID
-	SortNum        int8   `json:"sort_num,omitempty" codec:",omitempty"`         // 排序
+	SortNum        uint   `json:"sort_num,omitempty" codec:",omitempty"`         // 排序
 	OptionValue    string `json:"option_value,omitempty" codec:",omitempty"`     // 值
 }

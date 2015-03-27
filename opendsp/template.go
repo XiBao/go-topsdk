@@ -6,6 +6,7 @@ type Template struct {
 	ViewTemplateCode string `json:"view_template_code"`                           // 模板内容
 	CreativeType     uint8  `json:"creative_type"`                                // 支持创意类型[1,2]
 	Type             uint8  `json:"type"`                                         // 模板类型[1,2]
+	Status           uint8  `json:"status" codec:",omitempty"`                    // 模板上下线状态[0,1]
 	Size             string `json:"size"`                                         // 模板尺寸
 	Id               uint64 `json:"id,omitempty" codec:",omitempty"`              // 创意模板ID
 	DspId            uint64 `json:"dsp_id,omitempty" codec:",omitempty"`          // dspid

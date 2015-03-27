@@ -10,7 +10,7 @@ type AlibabaOpendspCampaignTargetingsGetRequest struct {
 
 // create new request
 func NewAlibabaOpendspCampaignTargetingsGetRequest() (req *AlibabaOpendspCampaignTargetingsGetRequest) {
-	request := topsdk.Request{MethodName: "alibaba.opendsp.campaign.targetings.get", Params: make(map[string]interface{}, 2)}
+	request := topsdk.Request{MethodName: "alibaba.opendsp.campaigns.targetings.get", Params: make(map[string]interface{}, 2)}
 	req = &AlibabaOpendspCampaignTargetingsGetRequest{
 		Request: &request,
 	}

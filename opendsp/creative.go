@@ -14,7 +14,7 @@ type Creative struct {
 	DspCreativeId  string `json:"dsp_creative_id,omitempty", codec:",omitempty"` // DSP自己维护的创意ID
 	Id             uint64 `json:"id,omitempty" codec:",omitempty"`               // 创意ID
 	DspId          uint64 `json:"dsp_id,omitempty" codec:",omitempty"`           // DSP用户ID
-	Status         uint8  `json:"status,omitempty" codec:",omitempty"`           // 创意上下线状态[0,1]
+	Status         uint8  `json:"status" codec:",omitempty"`                     // 创意上下线状态[0,1]
 	CreateTime     string `json:"gmt_create,omitempty" codec:",omitempty"`       // 创建时间
 	ModifiedTime   string `json:"gmt_modified,omitempty" codec:",omitempty"`     // 更新时间
 }
