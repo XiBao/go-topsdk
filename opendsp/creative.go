@@ -3,7 +3,7 @@ package opendsp
 // 推广创意
 type Creative struct {
 	TemplateId     uint64 `json:"template_id"`                                   // 所属模板ID
-	CatId          uint64 `json:"cat_id"`                                        // 创意所属类目ID,字典服务接口获取
+	CatId          string `json:"cat_id"`                                        // 创意所属类目ID,字典服务接口获取
 	DspCustId      string `json:"dsp_cust_id"`                                   // DSP自己维护的推广用户ID
 	Title          string `json:"title"`                                         // 创意标题
 	Content        string `json:"content"`                                       // 创意内容
