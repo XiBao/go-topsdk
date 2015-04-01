@@ -46,14 +46,14 @@ func (req *TanxQualificationAddRequest) GetToken() string {
 }
 
 // 从1970年到当前时间的秒
-func (req *TanxQualificationAddRequest) SetSignTime(signTime uint64) {
+func (req *TanxQualificationAddRequest) SetSignTime(signTime int64) {
 	req.Request.Params["sign_time"] = signTime
 }
 
-func (req *TanxQualificationAddRequest) GetSignTime() uint64 {
+func (req *TanxQualificationAddRequest) GetSignTime() int64 {
 	signTime, found := req.Request.Params["sign_time"]
 	if found {
-		return signTime.(uint64)
+		return signTime.(int64)
 	}
 	return 0
 }
