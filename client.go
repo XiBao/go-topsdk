@@ -69,6 +69,16 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 			sysParams[k] = fmt.Sprintf("%d", v.(uint8))
 		case uint:
 			sysParams[k] = fmt.Sprintf("%d", v.(uint))
+		case int64:
+			sysParams[k] = fmt.Sprintf("%d", v.(int64))
+		case int32:
+			sysParams[k] = fmt.Sprintf("%d", v.(int32))
+		case int16:
+			sysParams[k] = fmt.Sprintf("%d", v.(int16))
+		case int8:
+			sysParams[k] = fmt.Sprintf("%d", v.(int8))
+		case int:
+			sysParams[k] = fmt.Sprintf("%d", v.(int))
 		case float32:
 			sysParams[k] = fmt.Sprintf("%f", v.(float32))
 		case float64:
