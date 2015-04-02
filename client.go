@@ -27,6 +27,7 @@ type Request struct {
 type Client struct {
 	AppKey    string
 	SecretKey string
+	Sandbox   bool
 }
 
 //create new client
@@ -99,7 +100,11 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 		values.Add(k, v)
 	}
 	//reqUrl := GATEWAY_URL + "?" + values.Encode()
-	response, e := http.PostForm(GATEWAY_URL, values)
+	gatewayUrl := GATEWAY_URL
+	if c.Sandbox {
+		gatewayUrl = SANDBOX_GATEWAY_URL
+	}
+	response, e := http.PostForm(gatewayUrl, values)
 	if e != nil {
 		return nil, Error{Code: 0, Msg: "HTTP Response Error"}
 	}
