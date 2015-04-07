@@ -10,7 +10,7 @@ type SimbaAccountBalanceGetRequest struct {
 
 // create new request
 func NewSimbaAccountBalanceGetRequest() (req *SimbaAccountBalanceGetRequest) {
-	request := topsdk.Request{MethodName: "taobao.simba.adgroups.get", Params: make(map[string]interface{}, 1)}
+	request := topsdk.Request{MethodName: "taobao.simba.account.balance.get", Params: make(map[string]interface{}, 1)}
 	req = &SimbaAccountBalanceGetRequest{
 		Request: &request,
 	}
