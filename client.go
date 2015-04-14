@@ -104,7 +104,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	if c.Sandbox {
 		gatewayUrl = SANDBOX_GATEWAY_URL
 	}
-	response, e := http.PostForm(gatewayUrl, values)
+	response, e := http.DefaultClient.Post(gatewayUrl, "application/x-www-form-urlencoded; charset=UTF-8", strings.NewReader(values.Encode()))
 	if e != nil {
 		return nil, Error{Code: 0, Msg: "HTTP Response Error"}
 	}
@@ -114,7 +114,6 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	if e != nil {
 		return nil, Error{Code: 0, Msg: fmt.Sprintf("ReadAll on response.Body: %v", e)}
 	}
-
 	j := make(map[string]interface{})
 	switch sysParams["format"] {
 	case JSON_FORMAT:
