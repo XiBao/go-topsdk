@@ -6,25 +6,25 @@ import (
 	"github.com/XiBao/topsdk/opendsp"
 )
 
-type AlibabaOpendspCustomersAdd struct {
+type AlibabaOpendspCustomersAddRequest struct {
 	Request *topsdk.Request
 }
 
 // create new request
-func NewAlibabaOpendspCustomersAdd() (req *AlibabaOpendspCustomersAdd) {
+func NewAlibabaOpendspCustomersAddRequest() (req *AlibabaOpendspCustomersAddRequest) {
 	request := topsdk.Request{MethodName: "alibaba.opendsp.customers.add", Params: make(map[string]interface{}, 1)}
-	req = &AlibabaOpendspCustomersAdd{
+	req = &AlibabaOpendspCustomersAddRequest{
 		Request: &request,
 	}
 	return
 }
 
-func (req *AlibabaOpendspCustomersAdd) SetCustomerList(customers []*opendsp.Customer) {
+func (req *AlibabaOpendspCustomersAddRequest) SetCustomerList(customers []*opendsp.Customer) {
 	js, _ := json.Marshal(customers)
 	req.Request.Params["customer_list"] = string(js)
 }
 
-func (req *AlibabaOpendspCustomersAdd) GetCustomerList() []*opendsp.Customer {
+func (req *AlibabaOpendspCustomersAddRequest) GetCustomerList() []*opendsp.Customer {
 	js, found := req.Request.Params["customer_list"]
 	if found {
 		customers := []*opendsp.Customer{}
