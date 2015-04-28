@@ -31,15 +31,15 @@ func (req *AlibabaOpendspReportCampaignsGetRequest) GetReportName() string {
 	return ""
 }
 
-func (req *AlibabaOpendspReportCampaignsGetRequest) SetQueryParam(query *opendsp.ReportParams) {
+func (req *AlibabaOpendspReportCampaignsGetRequest) SetQueryParam(query *opendsp.CampaignReportParams) {
 	js, _ := json.Marshal(query)
 	req.Request.Params["query_param"] = string(js)
 }
 
-func (req *AlibabaOpendspReportCampaignsGetRequest) GetQueryParam() *opendsp.ReportParams {
+func (req *AlibabaOpendspReportCampaignsGetRequest) GetQueryParam() *opendsp.CampaignReportParams {
 	js, found := req.Request.Params["query_param"]
 	if found {
-		query := &opendsp.ReportParams{}
+		query := &opendsp.CampaignReportParams{}
 		json.Unmarshal([]byte(js.(string)), query)
 		return query
 	}

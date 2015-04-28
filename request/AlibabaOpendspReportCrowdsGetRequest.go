@@ -31,15 +31,15 @@ func (req *AlibabaOpendspReportCrowdsGetRequest) GetReportName() string {
 	return ""
 }
 
-func (req *AlibabaOpendspReportCrowdsGetRequest) SetQueryParam(query *opendsp.ReportParams) {
+func (req *AlibabaOpendspReportCrowdsGetRequest) SetQueryParam(query *opendsp.CrowdReportParams) {
 	js, _ := json.Marshal(query)
 	req.Request.Params["query_param"] = string(js)
 }
 
-func (req *AlibabaOpendspReportCrowdsGetRequest) GetQueryParam() *opendsp.ReportParams {
+func (req *AlibabaOpendspReportCrowdsGetRequest) GetQueryParam() *opendsp.CrowdReportParams {
 	js, found := req.Request.Params["query_param"]
 	if found {
-		query := &opendsp.ReportParams{}
+		query := &opendsp.CrowdReportParams{}
 		json.Unmarshal([]byte(js.(string)), query)
 		return query
 	}
