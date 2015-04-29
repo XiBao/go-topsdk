@@ -12,4 +12,5 @@ type Adgroup struct {
 	CreateTime     string `json:"gmt_create,omitempty" codec:",omitempty"`      // 创建时间
 	ModifiedTime   string `json:"gmt_modified,omitempty" codec:",omitempty"`    // 修改时间
 	FreqImpression int    `json:"freq_impression,omitempty" codec:",omitempty"` // 用户频次控制（-1表示没有限制）
+	Price          uint   `json:"price,omitempty" codec:",omitempty"`           //出价价格，单位是分
 }
