@@ -18,12 +18,12 @@ func NewTmcMessagesConsumeRequest() (req *TmcMessagesConsumeRequest) {
 }
 
 // 用户分组名称，不传表示消费默认分组，如果应用没有设置用户分组，传入分组名称将会返回错误
-func (req *TmcMessagesConsumeRequest) SetGroupName(fields string) {
-	req.Request.Params["group_name"] = fields
+func (req *TmcMessagesConsumeRequest) SetGroupName(group_name string) {
+	req.Request.Params["group_name"] = group_name
 }
 
 func (req *TmcMessagesConsumeRequest) GetGroupName() string {
-	fields, found := req.Request.Params["fields"]
+	fields, found := req.Request.Params["group_name"]
 	if found {
 		return fields.(string)
 	}
