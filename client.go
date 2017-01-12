@@ -114,6 +114,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	if e != nil {
 		return nil, Error{Code: 0, Msg: fmt.Sprintf("ReadAll on response.Body: %v", e)}
 	}
+	//log.Println(string(body))
 	j := make(map[string]interface{})
 	switch sysParams["format"] {
 	case JSON_FORMAT:
