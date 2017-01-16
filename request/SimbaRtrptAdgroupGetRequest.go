@@ -10,7 +10,7 @@ type SimbaRtrptAdgroupGetRequest struct {
 
 // create new request
 func NewSimbaRtrptAdgroupGetRequest() (req *SimbaRtrptAdgroupGetRequest) {
-	request := topsdk.Request{MethodName: "taobao.simba.rtrpt.adgroup.get", Params: make(map[string]interface{}, 2)}
+	request := topsdk.Request{MethodName: "taobao.simba.rtrpt.adgroup.get", Params: make(map[string]interface{}, 5)}
 	req = &SimbaRtrptAdgroupGetRequest{
 		Request: &request,
 	}
