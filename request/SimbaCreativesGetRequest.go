@@ -10,7 +10,7 @@ type SimbaCreativesGetRequest struct {
 
 // create new request
 func NewSimbaCreativesGetRequest() (req *SimbaCreativesGetRequest) {
-	request := topsdk.Request{MethodName: "taobao.simba.creative.update", Params: make(map[string]interface{}, 4)}
+	request := topsdk.Request{MethodName: "taobao.simba.creatives.get", Params: make(map[string]interface{}, 3)}
 	req = &SimbaCreativesGetRequest{
 		Request: &request,
 	}
