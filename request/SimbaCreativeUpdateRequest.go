@@ -77,3 +77,15 @@ func (req *SimbaCreativeUpdateRequest) GetTitle() string {
 	}
 	return ""
 }
+
+func (req *SimbaCreativeUpdateRequest) SetPictureId(pictureId uint64) {
+	req.Request.Params["picture_id"] = pictureId
+}
+
+func (req *SimbaCreativeUpdateRequest) GetPictureId() uint64 {
+	pictureId, found := req.Request.Params["picture_id"]
+	if found {
+		return pictureId.(uint64)
+	}
+	return 0
+}
