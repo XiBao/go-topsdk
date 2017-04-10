@@ -1,6 +1,7 @@
 package topsdk
 
 import (
+	"bytes"
 	"crypto/md5"
 	"crypto/sha1"
 	"encoding/hex"
@@ -10,6 +11,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 	"sort"
@@ -22,6 +24,11 @@ type Request struct {
 	MethodName string
 	Format     string
 	Params     map[string]interface{}
+}
+
+type MultipartFile struct {
+	FileName string
+	Content  []byte
 }
 
 type Client struct {
@@ -56,6 +63,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	if len(session) > 0 && session[0] != "" {
 		sysParams["session"] = session[0]
 	}
+	multifileParams := make(map[string]*MultipartFile)
 	for k, v := range req.Params {
 		switch v.(type) {
 		case string:
@@ -84,6 +92,8 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 			sysParams[k] = fmt.Sprintf("%f", v.(float32))
 		case float64:
 			sysParams[k] = fmt.Sprintf("%f", v.(float64))
+		case *MultipartFile:
+			multifileParams[k] = v.(*MultipartFile)
 		case bool:
 			if v.(bool) {
 				sysParams[k] = "true"
@@ -92,7 +102,7 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 			}
 		}
 	}
-	//log.Println(sysParams)
+	//fmt.Printf("sysParams: %v", sysParams)
 	rawSign := c.GenerateRawSign(sysParams)
 	sysParams["sign"] = c.GenerateSign(rawSign)
 	values := url.Values{}
@@ -104,11 +114,34 @@ func (c *Client) Execute(req *Request, session ...string) (result interface{}, e
 	if c.Sandbox {
 		gatewayUrl = SANDBOX_GATEWAY_URL
 	}
-	response, e := http.DefaultClient.Post(gatewayUrl, "application/x-www-form-urlencoded; charset=UTF-8", strings.NewReader(values.Encode()))
-	if e != nil {
-		return nil, Error{Code: 0, Msg: "HTTP Response Error"}
-	}
 
+	var (
+		response *http.Response
+		e        error
+	)
+	if len(multifileParams) > 0 {
+		reqBuffer := new(bytes.Buffer)
+		w := multipart.NewWriter(reqBuffer)
+		for k, v := range multifileParams {
+			fw, _ := w.CreateFormFile(k, v.FileName)
+			fw.Write(v.Content)
+		}
+		for k, v := range sysParams {
+			fw, _ := w.CreateFormField(k)
+			fw.Write([]byte(v))
+		}
+		w.Close()
+
+		response, e = http.DefaultClient.Post(gatewayUrl, w.FormDataContentType(), reqBuffer)
+		if e != nil {
+			return nil, Error{Code: 0, Msg: "HTTP Response Error"}
+		}
+	} else {
+		response, e = http.DefaultClient.Post(gatewayUrl, "application/x-www-form-urlencoded; charset=UTF-8", strings.NewReader(values.Encode()))
+		if e != nil {
+			return nil, Error{Code: 0, Msg: "HTTP Response Error"}
+		}
+	}
 	defer response.Body.Close()
 	body, e := ioutil.ReadAll(response.Body)
 	if e != nil {

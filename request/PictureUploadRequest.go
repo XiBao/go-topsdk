@@ -31,14 +31,14 @@ func (req *PictureUploadRequest) GetPicCateId() uint64 {
 }
 
 // 图片二进制文件流
-func (req *PictureUploadRequest) SetImg(img []byte) {
+func (req *PictureUploadRequest) SetImg(img *topsdk.MultipartFile) {
 	req.Request.Params["img"] = img
 }
 
-func (req *PictureUploadRequest) GetImg() []byte {
+func (req *PictureUploadRequest) GetImg() *topsdk.MultipartFile {
 	img, found := req.Request.Params["img"]
 	if found {
-		return img.([]byte)
+		return img.(*topsdk.MultipartFile)
 	}
 	return nil
 }
