@@ -2,7 +2,6 @@ package TopRequest
 
 import (
 	"github.com/XiBao/topsdk"
-	"time"
 )
 
 type PicturesCountRequest struct {
@@ -18,16 +17,16 @@ func NewPicturesCountRequest() (req *PicturesCountRequest) {
 	return
 }
 
-func (req *PicturesCountRequest) SetStartDate(startDate time.Time) {
+func (req *PicturesCountRequest) SetStartDate(startDate string) {
 	req.Request.Params["start_date"] = startDate
 }
 
-func (req *PicturesCountRequest) GetStartDate() time.Time {
+func (req *PicturesCountRequest) GetStartDate() string {
 	startDate, found := req.Request.Params["start_date"]
 	if found {
-		return startDate.(time.Time)
+		return startDate.(string)
 	}
-	return time.Time{}
+	return ""
 }
 
 //图片分类ID
@@ -55,28 +54,28 @@ func (req *PicturesCountRequest) GetTitle() string {
 	return ""
 }
 
-func (req *PicturesCountRequest) SetEndDate(endDate time.Time) {
+func (req *PicturesCountRequest) SetEndDate(endDate string) {
 	req.Request.Params["end_date"] = endDate
 }
 
-func (req *PicturesCountRequest) GetEndDate() time.Time {
+func (req *PicturesCountRequest) GetEndDate() string {
 	endDate, found := req.Request.Params["end_date"]
 	if found {
-		return endDate.(time.Time)
+		return endDate.(string)
 	}
-	return time.Time{}
+	return ""
 }
 
-func (req *PicturesCountRequest) SetStartModifiedDate(startModifiedDate time.Time) {
+func (req *PicturesCountRequest) SetStartModifiedDate(startModifiedDate string) {
 	req.Request.Params["start_modified_date"] = startModifiedDate
 }
 
-func (req *PicturesCountRequest) GetStartModifiedDate() time.Time {
+func (req *PicturesCountRequest) GetStartModifiedDate() string {
 	startModifiedDate, found := req.Request.Params["start_modified_date"]
 	if found {
-		return startModifiedDate.(time.Time)
+		return startModifiedDate.(string)
 	}
-	return time.Time{}
+	return ""
 }
 
 func (req *PicturesCountRequest) SetDeleted(deleted string) {
