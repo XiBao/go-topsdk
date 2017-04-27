@@ -10,7 +10,7 @@ type ZuanshiShopItemFindRequest struct {
 
 // create new request
 func NewZuanshiShopItemFindRequest() (req *ZuanshiShopItemFindRequest) {
-	request := topsdk.Request{MethodName: "taobao.zuanshi.shop.item.find", Params: make(map[string]interface{}, 1)}
+	request := topsdk.Request{MethodName: "taobao.zuanshi.shop.item.find", Params: make(map[string]interface{}, 3)}
 	req = &ZuanshiShopItemFindRequest{
 		Request: &request,
 	}
@@ -27,4 +27,34 @@ func (req *ZuanshiShopItemFindRequest) GetItemName() string {
 		return itemName.(string)
 	}
 	return ""
+}
+
+// 分页大小, 默认值：15 最小值：1 最大长度：200
+func (req *ZuanshiShopItemFindRequest) SetPageSize(pageSize uint) {
+	if pageSize == 0 {
+		pageSize = 15
+	}
+	req.Request.Params["page_size"] = pageSize
+}
+
+func (req *ZuanshiShopItemFindRequest) GetPageSize() uint {
+	if pageSize, found := req.Request.Params["page_size"]; found {
+		return pageSize.(uint)
+	}
+	return 15
+}
+
+// 当前页码, 默认值：1
+func (req *ZuanshiShopItemFindRequest) SetPageNum(pageNum uint) {
+	if pageNum == 0 {
+		pageNum = 1
+	}
+	req.Request.Params["page_num"] = pageNum
+}
+
+func (req *ZuanshiShopItemFindRequest) GetPageNum() uint {
+	if pageNum, found := req.Request.Params["page_num"]; found {
+		return pageNum.(uint)
+	}
+	return 1
 }
