@@ -25,7 +25,7 @@ func (req *ZuanshiBannerInterestFindRequest) SetItemIds(ids []uint64) {
 	for _, id := range ids {
 		idsStr = append(idsStr, strconv.FormatUint(id, 10))
 	}
-	req.Request.Params["item_ids"] = idsStr
+	req.Request.Params["item_ids"] = strings.Join(idsStr, ",")
 }
 
 func (req *ZuanshiBannerInterestFindRequest) GetItemIds() []uint64 {
