@@ -25,7 +25,7 @@ func (req *ZuanshiBannerAdgroupDeleteRequest) SetAdgroupIdList(ids []uint64) {
 	for _, id := range ids {
 		idsStr = append(idsStr, strconv.FormatUint(id, 10))
 	}
-	req.Request.Params["adgroup_id_list"] = idsStr
+	req.Request.Params["adgroup_id_list"] = strings.Join(idsStr, ",")
 }
 
 func (req *ZuanshiBannerAdgroupDeleteRequest) GetAdgroupIdList() []uint64 {

@@ -25,7 +25,7 @@ func (req *ZuanshiBannerCampaignFindRequest) SetCampaignIdList(ids []uint64) {
 	for _, id := range ids {
 		idsStr = append(idsStr, strconv.FormatUint(id, 10))
 	}
-	req.Request.Params["campaign_id_list"] = idsStr
+	req.Request.Params["campaign_id_list"] = strings.Join(idsStr, ",")
 }
 
 func (req *ZuanshiBannerCampaignFindRequest) GetCampaignIdList() []uint64 {
