@@ -105,6 +105,18 @@ func (req *ZuanshiBannerCampaignFindRequest) GetType() uint8 {
 	return 0
 }
 
+// 计划类型：-1：自定义，1：日常托管，2：日常推荐，3：拉新托管，4：拉新推荐
+func (req *ZuanshiBannerCampaignFindRequest) SetMarketingdemand(marketingdemand int8) {
+	req.Request.Params["marketingdemand"] = marketingdemand
+}
+
+func (req *ZuanshiBannerCampaignFindRequest) GetMarketingdemand() int8 {
+	if marketingdemand, found := req.Request.Params["marketingdemand"]; found {
+		return marketingdemand.(int8)
+	}
+	return 0
+}
+
 // 计划名称
 func (req *ZuanshiBannerCampaignFindRequest) SetName(name string) {
 	req.Request.Params["name"] = name
