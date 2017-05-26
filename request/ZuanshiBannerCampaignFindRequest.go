@@ -47,7 +47,7 @@ func (req *ZuanshiBannerCampaignFindRequest) SetStatusList(statusList []uint8) {
 	for _, status := range statusList {
 		statusStr = append(statusStr, strconv.FormatUint(uint64(status), 10))
 	}
-	req.Request.Params["status_list"] = statusStr
+	req.Request.Params["status_list"] = strings.Join(statusStr, ",")
 }
 
 func (req *ZuanshiBannerCampaignFindRequest) GetStatusList() []uint8 {
