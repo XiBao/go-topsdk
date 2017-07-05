@@ -100,6 +100,18 @@ func (req *ZuanshiBannerCreativeFindRequest) GetAuditStatusList() []int {
 	return auditStatusList
 }
 
+// 在线状态：1：正常，-1：回收站
+func (req *ZuanshiBannerCreativeFindRequest) SetOnlineStatus(onlineStatus int8) {
+	req.Request.Params["online_status"] = onlineStatus
+}
+
+func (req *ZuanshiBannerCreativeFindRequest) GetOnlineStatus() int8 {
+	if onlineStatus, found := req.Request.Params["online_status"]; found {
+		return onlineStatus.(int8)
+	}
+	return 0
+}
+
 // 创意等级,1：一级，2：二级，3：三级，4：四级，10：十级，99：未分级
 func (req *ZuanshiBannerCreativeFindRequest) SetCreativeLevel(level uint) {
 	req.Request.Params["creative_level"] = level
