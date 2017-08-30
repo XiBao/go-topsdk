@@ -66,7 +66,12 @@ func getIndexSecretData(data string, sep rune) *SecretData {
 }
 
 func checkEncryptData(data []string) bool {
-	if len(data) == 2 {
+	dataLen := len(data)
+	if dataLen < 2 {
+		return false
+	}
+
+	if dataLen == 2 {
 		return util.IsBase64(data[0])
 	} else {
 		return util.IsBase64(data[0]) && util.IsBase64(data[1])
@@ -86,14 +91,14 @@ func isEncryptData(data string, typ string) bool {
 	if err != nil {
 		return false
 	}
-	if []rune(data)[0] != sep || []rune(data)[dataLen-1] != sep {
+	if []rune(data)[0] != sep || len([]rune(data)) < 1 || []rune(data)[dataLen-1] != sep {
 		return false
 	}
 
 	vals := strings.Split(strings.Trim(data, string(sep)), string(sep))
 	valCnt := len(vals)
 	if sep == SEP_CHAR_PHONE {
-		if valCnt != 3 {
+		if valCnt != 3 || len([]rune(data)) < 2 {
 			return false
 		}
 
@@ -108,11 +113,14 @@ func isEncryptData(data string, typ string) bool {
 			return util.IsBase64(vals[valCnt-2])
 		}
 	}
-	return (([]rune(data)[dataLen-2] == sep && valCnt == 3) || valCnt == 2) && checkEncryptData(vals)
+	return len([]rune(data)) >= 2 && (([]rune(data)[dataLen-2] == sep && valCnt == 3) || valCnt == 2) && checkEncryptData(vals)
 }
 
 func getDataByType(data string, typ string) *SecretData {
-	dataLen := len(data)
+	dataLen := len([]rune(data))
+	if dataLen < 2 {
+		return nil
+	}
 	sep, err := get_sep_by_type(typ)
 	if err != nil {
 		return nil

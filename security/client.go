@@ -38,13 +38,13 @@ func (c *Client) SetCache(cache ICache) {
  */
 func (c *Client) Encrypt(data, typ, session string, version int) (string, error) {
 	if data == "" || typ == "" {
-		log.Println("Encrypt: empty data or empty typ")
+		//log.Println("Encrypt: empty data or empty typ")
 		return data, nil
 	}
 
 	ctx := c.getCacheContext(session, 0)
 	if ctx == nil {
-		log.Println("Encrypt: no secret context")
+		//log.Println("Encrypt: no secret context")
 		return data, nil
 	}
 	//log.Printf("Encrypt: found secret context: %s", util.Json(ctx))
@@ -55,13 +55,13 @@ func (c *Client) Encrypt(data, typ, session string, version int) (string, error)
 
 func (c *Client) Decrypt(data, typ, session string) (string, error) {
 	if data == "" || typ == "" {
-		log.Println("Decrypt: empty data or empty typ")
+		//log.Println("Decrypt: empty data or empty typ")
 		return data, nil
 	}
 
 	sdata := getDataByType(data, typ)
 	if sdata == nil {
-		log.Println("Decrypt: no secret data")
+		//log.Println("Decrypt: no secret data")
 		return data, nil
 	}
 	//log.Printf("Decrypt: found secret data: %s", util.Json(sdata))
@@ -73,7 +73,7 @@ func (c *Client) Decrypt(data, typ, session string) (string, error) {
 		ctx = c.getCacheContext(session, sdata.Version)
 	}
 	if ctx == nil {
-		log.Println("Decrypt: no secret context")
+		//log.Println("Decrypt: no secret context")
 		return data, nil
 	}
 	//log.Printf("Decrypt: found secret context: %s", util.Json(ctx))

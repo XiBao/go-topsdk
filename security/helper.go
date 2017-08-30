@@ -65,7 +65,10 @@ func (h *Helper) Decrypt(data string, cryptType string) (string, error) {
 	if !isEncryptData(data, cryptType) {
 		return "", fmt.Errorf("数据[%s]不是类型为[%s]的加密数据", data, cryptType)
 	}
-	dataLen := len(data)
+	dataLen := len([]rune(data))
+	if dataLen < 2 {
+		return data, nil
+	}
 	sep, err := get_sep_by_type(cryptType)
 	if err != nil {
 		return "", err
@@ -100,7 +103,7 @@ func (h *Helper) Search(data, cryptType string) (string, error) {
 	}
 
 	if sep == SEP_CHAR_PHONE {
-		if len(data) != 4 {
+		if len([]rune(data)) != 4 {
 			return "", errors.New("phoneNumber error")
 		}
 		encryptRet, err := util.HmacMD5EncryptToBase64(data, h.secret, 0)
